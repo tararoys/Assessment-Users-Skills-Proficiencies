@@ -56,3 +56,21 @@ post '/users' do
     erb :sign_up
   end
 end
+
+get '/users/:id' do 
+  if session[:user_id].to_s == params[:id].to_s
+    erb :user_page
+  else 
+    redirect to '/'
+  end 
+end 
+
+#--------------proficiencies --------------------------#
+
+post '/proficiencies' do 
+  proficiency = Proficiency.new(user_id: session[:user_id], skill_id: 2, years_experience: 6, formal_education: false);
+  proficiency.save
+
+  redirect to '/'
+
+end 
